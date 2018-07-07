@@ -5,20 +5,20 @@
       这里设置冰箱大小
       <dl>
         <dt>冰箱门数</dt>
-        <dd><input type="number" v-model="nums"></dd>
+        <dd><input type="number" :value="nums" @change="changeNums"></dd>
       </dl>
       <dl>
         <dt>冰箱容量</dt>
         <dd><input type="text" v-model="caps"></dd>
       </dl>
-      <div v-for="(item, index) in nums" :key="index">
+      <div v-for="(item, index) in infoArr" :key="index">
         <dl>
           <dt>冰箱门功能</dt>
-          <dd><input type="text" v-model="infoArr[index].type"></dd>
+          <dd><input type="text" v-model="item.type"></dd>
         </dl>
         <dl>
           <dt>冰箱门大小</dt>
-          <dd><input type="text" v-model="infoArr[index].size"></dd>
+          <dd><input type="text" v-model="item.size"></dd>
         </dl>
       </div>
       
@@ -40,20 +40,21 @@ export default {
     return {
       title: '冰箱助手',
       nums: 0,
-      caps: 0
+      caps: 0,
+      infoArr: []
     }
   },
 
   computed: {
-    infoArr: {
-      get () {
-        let arr = []
-        return arr
-      },
-      set () {
+    // infoArr: {
+    //   get () {
+    //     let arr = []
+    //     return arr
+    //   },
+    //   set () {
 
-      }
-    }
+    //   }
+    // }
   },
 
   methods: {
@@ -75,6 +76,24 @@ export default {
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
+    },
+    changeNums (e) {
+      // console.log(e)
+      // this.nums = 2
+      console.log(this.nums)
+      let newArr = []
+      for (let i = 0; i < this.nums; i--) {
+        if (i < this.infoArr.length) {
+          newArr.push(this.infoArr[i])
+        } else {
+          let tempObj = {
+            type: '',
+            size: 0
+          }
+          newArr.push(tempObj)
+        }
+      }
+      this.infoArr = newArr
     }
   },
 
