@@ -1,40 +1,59 @@
 <template>
-  <div class="container" @click="clickHandle('test click', $event)">
-
-    <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-      <div class="userinfo-nickname">
-        <card :text="userInfo.nickName"></card>
+  <div class="m-index" @click="clickHandle('test click', $event)">
+    <div class="u-tit">冰箱小助手</div>
+    <div class="m-body">
+      这里设置冰箱大小
+      <dl>
+        <dt>冰箱门数</dt>
+        <dd><input type="number" v-model="nums"></dd>
+      </dl>
+      <dl>
+        <dt>冰箱容量</dt>
+        <dd><input type="text" v-model="caps"></dd>
+      </dl>
+      <div v-for="(item, index) in nums" :key="index">
+        <dl>
+          <dt>冰箱门功能</dt>
+          <dd><input type="text" v-model="infoArr[index].type"></dd>
+        </dl>
+        <dl>
+          <dt>冰箱门大小</dt>
+          <dd><input type="text" v-model="infoArr[index].size"></dd>
+        </dl>
       </div>
+      
     </div>
-
-    <div class="usermotto">
-      <div class="user-motto">
-        <card :text="motto"></card>
-      </div>
+    <div class="m-foot">
+      <a href="/pages/mainCnt/main" class="u-btn u-btn-go">进入冰箱</a>
     </div>
-
-    <form class="form-container">
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
   </div>
 </template>
 
 <script>
-import card from '@/components/card'
+// import card from '@/components/setInit/page1'
 
 export default {
+  components: {
+  },
+
   data () {
     return {
-      motto: 'Hello World',
-      userInfo: {}
+      title: '冰箱助手',
+      nums: 0,
+      caps: 0
     }
   },
 
-  components: {
-    card
+  computed: {
+    infoArr: {
+      get () {
+        let arr = []
+        return arr
+      },
+      set () {
+
+      }
+    }
   },
 
   methods: {
@@ -66,40 +85,16 @@ export default {
 }
 </script>
 
-<style scoped>
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 150px;
-}
-
-.form-control {
-  display: block;
-  padding: 0 12px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-}
-
-.counter {
-  display: inline-block;
-  margin: 10px auto;
-  padding: 5px 10px;
-  color: blue;
-  border: 1px solid blue;
+<style lang="scss" scoped>
+.m-index{
+  background-color: rgb(185, 234, 238);
+  height: 100vh;
+  .u-tit{
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+  }
 }
 </style>
